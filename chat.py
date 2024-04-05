@@ -1,8 +1,7 @@
 import streamlit as st
 
-# In-memory user database with default login credentials
 users = {
-    "prithiv": "pmprithiv"  # Default username and password
+    "prithiv": "pmprithiv"  
 }
 
 def signup(username, password):
@@ -23,41 +22,44 @@ def login(username, password):
 def medical():
     st.title("Medical Input")
 
-    # Personal Information
-    st.header("Personal Information")
-    name = st.text_input("Name", "")
-    age = st.number_input("Age", min_value=0, max_value=150, step=1)
-    dob=st.date_input("Date of Birth")
-    gender = st.radio("Gender", ["Male", "Female", "Other"])
+    with st.form(key='medical_form'):
+        # Personal Information
+        st.header("Personal Information")
+        name = st.text_input("Name", "")
+        age = st.number_input("Age", min_value=0, max_value=150, step=1)
+        dob=st.date_input("Date of Birth")
+        gender = st.radio("Gender", ["Male", "Female", "Other"])
 
-    # Medical History
-    st.header("Medical History")
-    diabetes = st.selectbox("Do you have diabetes?", ["Yes", "No"])
-    hypertension = st.selectbox("Do you have hypertension?", ["Yes", "No"])
-    heart_disease = st.selectbox("Do you have heart disease?", ["Yes", "No"])
-    asthma = st.selectbox("Do you have asthma?", ["Yes", "No"])
-    other_conditions = st.text_area("Other medical conditions", "")
-    
-    # Symptoms Input
-    st.header("Symptoms")
-    symptom1 = st.text_input("Symptom 1", "")
-    symptom2 = st.text_input("Symptom 2", "")
-    symptom3 = st.text_input("Symptom 3", "")
+        # Medical History
+        st.header("Medical History")
+        diabetes = st.selectbox("Do you have diabetes?", ["Yes", "No"])
+        hypertension = st.selectbox("Do you have hypertension?", ["Yes", "No"])
+        heart_disease = st.selectbox("Do you have heart disease?", ["Yes", "No"])
+        asthma = st.selectbox("Do you have asthma?", ["Yes", "No"])
+        other_conditions = st.text_area("Other medical conditions", "")
+        
+        # Symptoms Input
+        st.header("Symptoms")
+        symptom1 = st.text_input("Symptom 1", "")
+        symptom2 = st.text_input("Symptom 2", "")
+        symptom3 = st.text_input("Symptom 3", "")
 
-    # Severity Input
-    st.header("Symptoms Severity")
-    severity1 = st.slider("Severity of symptom 1 (0-10)", min_value=0, max_value=10, value=5)
-    severity2 = st.slider("Severity of symptom 2 (0-10)", min_value=0, max_value=10, value=5)
-    severity3 = st.slider("Severity of symptom 3 (0-10)", min_value=0, max_value=10, value=5)
+        # Severity Input
+        st.header("Symptoms Severity")
+        severity1 = st.slider("Severity of symptom 1 (0-10)", min_value=0, max_value=10, value=5)
+        severity2 = st.slider("Severity of symptom 2 (0-10)", min_value=0, max_value=10, value=5)
+        severity3 = st.slider("Severity of symptom 3 (0-10)", min_value=0, max_value=10, value=5)
 
-    # Other related queries
-    st.header("Other Related Queries")
-    other_queries = st.text_area("Other related queries", "")
+        # Other related queries
+        st.header("Other Related Queries")
+        other_queries = st.text_area("Other related queries", "")
 
-    # Submit button
-    if st.button("Submit"):
-        # Process the input data here (e.g., store it in a database, perform analysis, etc.)
-        st.success("Input submitted successfully!")
+        # Submit button
+        submit_button = st.form_submit_button(label='Submit')
+
+        if submit_button:
+            # Process the input data here (e.g., store it in a database, perform analysis, etc.)
+            st.success("Input submitted successfully!")
 
 def main():
     st.title("Welcome to VedaCare App")
